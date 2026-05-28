@@ -1,0 +1,58 @@
+# ==============================================================================
+# HETA: Hessian-Enhanced Token Attribution — Default Configuration
+#
+# Reference: Pramanik et al. (2026), ICLR 2026.
+# ==============================================================================
+
+# --- Attribution Weights (Eq. 5) ---
+beta: 0.5          # Hessian-based sensitivity weight
+gamma: 0.5         # KL information impact weight
+
+# --- Hessian Estimation ---
+num_hvp_samples: 10     # Hutchinson / Rademacher probe vectors (m)
+low_rank: 0             # Low-rank approximation rank (0 = full Hessian)
+layer_subset: 0         # Compute curvature on last N layers (0 = all layers)
+use_fisher: false       # Use Gauss–Newton / Fisher surrogate
+
+# --- Token Masking ---
+mask_scheme: "zero"     # "zero" | "mean" | "unk"
+
+# --- Windowing (for long contexts) ---
+window_size: 0          # Sliding window length (0 = no windowing)
+window_overlap: 0.5     # Fractional overlap between windows
+
+# --- Compute ---
+device: "auto"          # "auto" | "cuda" | "cpu"
+dtype: "float32"        # "float32" | "float16" | "bfloat16"
+
+# --- Evaluation ---
+top_k_fractions:        # Fractions for Soft-NC / Soft-NS
+  - 0.1
+  - 0.2
+  - 0.3
+
+# ==============================================================================
+# Model-Specific Presets (uncomment the relevant block)
+# ==============================================================================
+
+# --- GPT-J 6B / Small models (all layers, full Hessian) ---
+# num_hvp_samples: 10
+# low_rank: 0
+# layer_subset: 0
+
+# --- Phi-3 Medium 14B ---
+# num_hvp_samples: 10
+# low_rank: 64
+# layer_subset: 0
+
+# --- LLaMA-3.1 70B (last 6 layers, low-rank + windowed) ---
+# num_hvp_samples: 10
+# low_rank: 64
+# layer_subset: 6
+# window_size: 512
+# window_overlap: 0.5
+
+# --- Qwen2.5 3B ---
+# num_hvp_samples: 10
+# low_rank: 0
+# layer_subset: 0

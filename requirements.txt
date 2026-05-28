@@ -1,0 +1,21 @@
+# ==============================================================================
+# HETA: Hessian-Enhanced Token Attribution — Python Dependencies
+# ==============================================================================
+# Core
+torch>=2.0.0
+transformers>=4.36.0
+numpy>=1.24.0
+
+# Evaluation (optional — install with `pip install -r requirements.txt`)
+datasets>=2.14.0
+scipy>=1.10.0
+scikit-learn>=1.3.0
+
+# Visualization (optional)
+matplotlib>=3.7.0
+
+# Development (optional)
+# pytest>=7.0
+# black
+# isort
+# flake8
